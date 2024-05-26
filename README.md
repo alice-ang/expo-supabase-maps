@@ -3,26 +3,6 @@
 
 </div>
 
-## Features
-
-This repository is 🔋 battery packed with:
-
-- ⚡️ Expo 49SDK
-- ✨ TypeScript
-- 💨 [Nativewind](https://www.nativewind.dev/quick-starts/expo)
-- GraphQL
-- 🔒 [Clerk](https://clerk.com/)
-- 💨 [Tanstack Query](https://tanstack.com/query/latest/docs/react/quick-start)
-- ⼬ [Expo router](https://docs.expo.dev/router/introduction/)
-- [hygraph cms](https://hygraph.com/)
-- Google Vision API
-- [React Native Health](https://github.com/agencyenterprise/react-native-health)
-- [React Native Health Connect](https://github.com/matinzd/react-native-health-connect)
-
-### Prerequisites ⚠️
-
-- [Figma Screens](https://www.figma.com/proto/rHQwpHltc6DXv47ZDZKnDf/Flick-Dark-Mode?page-id=0%3A1&type=design&node-id=10-661&viewport=-1530%2C832%2C1.17&t=Ki3S1zzJxYV4HXq3-1&scaling=scale-down&mode=design)(still WIP)
-
 ## Troubleshoot 🎯
 
 `npx expo-doctor `
