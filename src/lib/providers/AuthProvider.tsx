@@ -7,17 +7,26 @@ import {
   useEffect,
   useState,
 } from "react";
+import { Alert } from "react-native";
 
+type Profile = {
+  id: string;
+  username: string;
+  website: string;
+  avatar_url: string;
+};
 type AuthData = {
   session: Session | null;
-  profile: any;
+  profile: Profile | null;
   loading: boolean;
+  updateProfile: (profile: Omit<Profile, "id">) => void;
 };
 
 const AuthContext = createContext<AuthData>({
   session: null,
   loading: true,
   profile: null,
+  updateProfile: (profile: Omit<Profile, "id">) => {},
 });
 
 export default function AuthProvider({ children }: PropsWithChildren) {
@@ -52,8 +61,39 @@ export default function AuthProvider({ children }: PropsWithChildren) {
     });
   }, []);
 
+  const updateProfile = async ({
+    username,
+    website,
+    avatar_url,
+  }: Omit<Profile, "id">) => {
+    try {
+      setLoading(true);
+      if (!session?.user) throw new Error("No user on the session!");
+
+      const updates = {
+        id: session?.user.id,
+        username,
+        website,
+        avatar_url,
+        updated_at: new Date(),
+      };
+
+      const { error } = await supabase.from("profiles").upsert(updates);
+
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        Alert.alert(error.message);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ session, loading, profile }}>
+    <AuthContext.Provider value={{ session, loading, profile, updateProfile }}>
       {children}
     </AuthContext.Provider>
   );
